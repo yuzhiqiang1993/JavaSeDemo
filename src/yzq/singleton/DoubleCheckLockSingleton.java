@@ -10,11 +10,11 @@ package yzq.singleton;
 public class DoubleCheckLockSingleton {
 
 
-    private static DoubleCheckLockSingleton singleton = null;
-
+    private static volatile DoubleCheckLockSingleton singleton = null;
 
     private DoubleCheckLockSingleton() {
     }
+
 
     public static DoubleCheckLockSingleton getSingleton() {
         if (singleton == null) {
