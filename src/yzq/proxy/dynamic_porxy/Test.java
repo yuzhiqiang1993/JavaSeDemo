@@ -1,37 +1,20 @@
 package yzq.proxy.dynamic_porxy;
 
-import yzq.proxy.static_porxy.HuaWei;
-
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-
 public class Test {
-
     public static void main(String[] args) {
 
+        /*委托类*/
+        final CalIml calIml = new CalIml();
+//        System.out.println(calIml.add(1, 1));
 
-        HuaWei huaWei = new DynamicProxy<HuaWei>().create(new HuaWei());
+        /*代理类*/
+        final DynamicProxyInvocationHandler<Calculate> calculateDynamicProxyInvocationHandler = new DynamicProxyInvocationHandler<>();
+        /*创建的代理对象*/
+        final Calculate calculateProxy = calculateDynamicProxyInvocationHandler.create(calIml);
+        System.out.println(calculateProxy.add(1, 2));
+        System.out.println(calculateProxy.sub(5, 2));
+        System.out.println(calculateProxy.mul(12, 19));
+        System.out.println(calculateProxy.div(10, 5));
 
-        huaWei.sale();
-    }
-
-}
-
-
-class DynamicProxy<T> implements InvocationHandler {
-
-    private T t;
-
-    public T create(T t) {
-        this.t = t;
-
-        return (T) Proxy.newProxyInstance(t.getClass().getClassLoader(), t.getClass().getInterfaces(), this);
-
-    }
-
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return method.invoke(t, args);
     }
 }
