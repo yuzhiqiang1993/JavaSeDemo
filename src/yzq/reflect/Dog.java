@@ -1,6 +1,11 @@
 package yzq.reflect;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@DogAnnotation(name = "小黑",age = 3,color = "灰色")
 public class Dog {
 
     private String name = "";
@@ -35,6 +40,12 @@ public class Dog {
 
     public void setAge(int age) {
         this.age = age;
+    }
+    /*测试泛型*/
+    private Map<Integer, String> testGeneric(List<Boolean> list) {
+
+        return new HashMap<>();
+
     }
 
     @Override
